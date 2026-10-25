@@ -1,0 +1,25 @@
+# Firebase cache e depuração
+.firebase/
+firebase-debug.log*
+firebase-debug.*.log*
+
+# Arquivos locais e temporários
+projects.json
+diff.txt
+*.log
+
+# Variáveis de ambiente
+.env
+.env.local
+
+# Dependências
+node_modules/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
