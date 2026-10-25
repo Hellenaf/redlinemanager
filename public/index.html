@@ -6,20 +6,17 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
-    <!-- Configurações para Web App -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Redline">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#000000">
 
-    <!-- Favicon -->
     <link rel="icon" href="https://lh3.googleusercontent.com/d/136PZr5Q9SicBZJ5pJl0ORkJqrA9DcZ_0" type="image/png">
     <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/136PZr5Q9SicBZJ5pJl0ORkJqrA9DcZ_0">
 
     <title>Redline Gestão</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -48,13 +45,12 @@
         }
     </script>
 
-    <!-- Vue.js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- ApexCharts -->
+    
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- Lucide Icons -->
+    
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- PeerJS for WebRTC Screen Sharing -->
+    
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
@@ -67,7 +63,6 @@
             background-attachment: fixed;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -117,7 +112,6 @@
             transform: translateY(-2px);
         }
 
-        /* Inputs */
         .input-field {
             width: 100%;
             border-radius: 0.75rem;
@@ -150,7 +144,6 @@
             box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.3);
         }
 
-        /* Background Pattern */
         .bg-grid-pattern {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
@@ -166,7 +159,6 @@
             opacity: 0;
         }
 
-        /* ApexCharts Dark Mode Override */
         .dark .apexcharts-tooltip {
             background: #09090b !important;
             border: 1px solid #333 !important;
@@ -203,7 +195,6 @@
 <body
     class="bg-zinc-50 text-zinc-900 dark:bg-[#050505] dark:text-zinc-300 antialiased h-[100dvh] flex flex-col overflow-hidden selection:bg-red-500/30 selection:text-red-200">
 
-    <!-- Background Ambient Effects -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div class="absolute inset-0 bg-grid-pattern opacity-40 dark:opacity-20"></div>
         <div
@@ -239,7 +230,6 @@
 
     <div id="app" v-cloak class="h-full flex flex-col relative z-10 ease-in duration-500">
 
-        <!-- LOGIN / ACCESS SCREEN (PAINEL DE GESTÃO) -->
         <div v-if="currentSection === 'management' && !isAuthorized"
             class="fixed inset-0 z-[200] bg-zinc-50/90 dark:bg-[#050505]/90 backdrop-blur-xl flex items-center justify-center p-4 w-full h-full overflow-hidden">
             <div
@@ -304,11 +294,8 @@
             </div>
         </div>
 
-        <!-- ==================================================== -->
-        <!-- TELA INICIAL: CENTRAL DE TRANSMISSÃO REDLINE (PÚBLICA) -->
-        <!-- ==================================================== -->
         <div v-if="currentSection === 'screenshare'" class="flex-1 flex flex-col overflow-y-auto relative z-20 pb-16">
-            <!-- HEADER DA TELA INICIAL -->
+            
             <header class="h-16 shrink-0 px-4 md:px-8 flex items-center justify-between border-b transition-all duration-300 bg-white/70 border-zinc-200/50 dark:bg-[#050505]/70 dark:border-white/5 backdrop-blur-md sticky top-0 z-40">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden border border-zinc-200 dark:border-white/10 bg-zinc-100 dark:bg-black shadow-lg shadow-red-600/10 shrink-0">
@@ -323,9 +310,8 @@
                     </div>
                 </div>
 
-                <!-- AÇÕES DO HEADER -->
                 <div class="flex items-center gap-3">
-                    <!-- Status do Recrutador -->
+                    
                     <div v-if="currentRecruiter" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-xs text-red-500 font-bold">
                         <span>{{ currentRecruiter.emoji || '💼' }}</span>
                         <span class="text-zinc-800 dark:text-zinc-200 font-medium">{{ currentRecruiter.name }}</span>
@@ -341,7 +327,6 @@
                         Identificar Recrutador+
                     </button>
 
-                    <!-- Toggle Theme -->
                     <button @click="toggleTheme" class="w-9 h-9 rounded-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-all">
                         <svg v-if="isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                         <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
@@ -349,7 +334,6 @@
 
                     <div class="w-px h-5 bg-zinc-300 dark:bg-white/10"></div>
 
-                    <!-- Botão para o Painel de Gestão -->
                     <button @click="navigateToManagement"
                         class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white text-xs font-bold shadow-lg shadow-red-600/20 hover:shadow-red-600/40 hover:scale-[1.02] active:scale-95 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -361,9 +345,8 @@
                 </div>
             </header>
 
-            <!-- CONTEÚDO PRINCIPAL DA TELA INICIAL -->
             <div :class="['mx-auto w-full px-4 md:px-8 py-6 space-y-6 transition-all duration-500', (isStreaming || isWatching) ? 'max-w-7xl' : 'max-w-6xl']">
-                <!-- HERO BANNER (OCULTO QUANDO TRANSMITINDO OU ASSISTINDO PARA DAR FOCO AO VÍDEO) -->
+                
                 <div v-if="!isStreaming && !isWatching" class="relative overflow-hidden rounded-3xl p-8 md:p-10 border border-zinc-200/50 dark:border-white/10 bg-gradient-to-b from-zinc-100/80 to-white/40 dark:from-zinc-900/60 dark:to-[#0a0a0a]/60 backdrop-blur-xl shadow-2xl">
                     <div class="absolute -top-24 -right-24 w-96 h-96 bg-red-600/10 rounded-full blur-[100px] pointer-events-none"></div>
                     <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -380,7 +363,6 @@
                             </p>
                         </div>
 
-                        <!-- Botão rápido ou badge -->
                         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
                             <button v-if="!currentRecruiter" @click="showRecruiterAuthModal = true"
                                 class="px-6 py-3.5 rounded-2xl bg-zinc-900 dark:bg-white text-white dark:text-black font-black text-sm tracking-wide shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
@@ -396,8 +378,6 @@
                     </div>
                 </div>
 
-                <!-- SEÇÃO 1: PLAYER DE TRANSMISSÃO ATIVA (HOST OU ESPECTADOR COM FOCO MÁXIMO) -->
-                <!-- SE ESTIVER TRANSMITINDO (HOST) -->
                 <div v-if="isStreaming" class="card-base p-6 md:p-8 rounded-3xl border-red-500/30 bg-black/60 backdrop-blur-2xl shadow-2xl space-y-6 relative overflow-hidden animate-fade-in">
                     <div class="absolute -top-32 -right-32 w-80 h-80 bg-red-600/15 rounded-full blur-[90px] pointer-events-none"></div>
 
@@ -424,9 +404,8 @@
                             </div>
                         </div>
 
-                        <!-- Link da sala e botões -->
                         <div class="flex flex-wrap items-center gap-2 shrink-0">
-                            <!-- Seletor de Qualidade em Tempo Real (Host) -->
+                            
                             <div class="inline-flex items-center p-1 rounded-xl bg-zinc-200/80 dark:bg-zinc-800/80 border border-zinc-300 dark:border-white/10 gap-1 shadow-inner">
                                 <span class="text-[10px] uppercase font-bold text-zinc-500 dark:text-zinc-400 px-1.5 hidden sm:inline">Qualidade:</span>
                                 <button type="button" @click="changeStreamQuality('fast')"
@@ -459,11 +438,9 @@
                         </div>
                     </div>
 
-                    <!-- Video Element Preview -->
                     <div id="host-video-container" class="relative rounded-2xl overflow-hidden bg-black aspect-video flex items-center justify-center border border-zinc-300 dark:border-white/10 group shadow-2xl">
                         <video id="host-screen-preview" autoplay muted playsinline class="w-full h-full object-contain"></video>
 
-                        <!-- Controles sobrepostos no player -->
                         <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between p-3 rounded-xl bg-black/70 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white/10">
                             <div class="flex items-center gap-2 text-xs font-mono text-zinc-300">
                                 <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -491,7 +468,6 @@
                     </div>
                 </div>
 
-                <!-- SE ESTIVER ASSISTINDO A UMA SALA (VIEWER COM FOCO MÁXIMO) -->
                 <div v-if="isWatching && currentWatchingRoom" class="card-base p-6 md:p-8 rounded-3xl border-red-500/30 bg-black/60 backdrop-blur-2xl shadow-2xl space-y-6 relative overflow-hidden animate-fade-in">
                     <div class="absolute -top-32 -right-32 w-80 h-80 bg-red-600/15 rounded-full blur-[90px] pointer-events-none"></div>
 
@@ -530,11 +506,9 @@
                         </button>
                     </div>
 
-                    <!-- Video Element Viewer -->
                     <div id="viewer-video-container" class="relative rounded-2xl overflow-hidden bg-black aspect-video flex items-center justify-center border border-zinc-300 dark:border-white/10 group shadow-2xl">
                         <video id="viewer-screen-player" autoplay playsinline muted class="w-full h-full object-contain"></video>
 
-                        <!-- Indicador de carregamento ou erro de conexão caso ainda esteja conectando -->
                         <div v-if="!isViewerConnected" class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/90 backdrop-blur-md z-10 px-6 text-center">
                             <template v-if="!viewerConnectionError">
                                 <div class="w-12 h-12 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
@@ -563,7 +537,6 @@
                             </template>
                         </div>
 
-                        <!-- Overlay caso o navegador pause ou bloqueie o início do vídeo -->
                         <div v-if="isViewerConnected && videoPlayBlocked" class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/85 backdrop-blur-md z-20 px-6 text-center">
                             <button type="button" @click="manuallyStartPlayback" class="px-6 py-3 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm flex items-center gap-2 shadow-2xl transition-all transform hover:scale-105 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -572,7 +545,6 @@
                             <p class="text-xs text-zinc-400">Seu navegador pausou a reprodução automática.</p>
                         </div>
 
-                        <!-- Controles sobrepostos no player -->
                         <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between p-3 rounded-xl bg-black/70 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white/10 z-20">
                             <div class="flex items-center gap-2 text-xs font-mono text-zinc-300">
                                 <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -602,11 +574,10 @@
                     </div>
                 </div>
 
-                <!-- SEÇÃO 2: AÇÕES E PAINEL RECRUTADOR -->
                 <div v-if="!isStreaming && !isWatching" class="space-y-8">
-                    <!-- GRID COM CARDS DE AÇÃO (TRANSMITIR & ASSISTIR) -->
+                    
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <!-- CARD 1: INICIAR TRANSMISSÃO (RECRUTADOR+) -->
+                        
                         <div class="card-base p-8 rounded-3xl flex flex-col justify-between space-y-6 relative overflow-hidden group">
                         <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-red-600/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-red-600/20 transition-all duration-500"></div>
 
@@ -627,7 +598,6 @@
                                 </p>
                             </div>
 
-                            <!-- Se Logado como Recrutador -->
                             <div v-if="currentRecruiter" class="space-y-4 pt-2">
                                 <div class="p-3.5 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-between">
                                     <div class="flex items-center gap-2.5">
@@ -641,7 +611,7 @@
                                 </div>
 
                                 <div class="space-y-3 pt-1">
-                                    <!-- Seletor de Qualidade da Transmissão -->
+                                    
                                     <div class="space-y-1.5">
                                         <div class="flex items-center justify-between">
                                             <label class="text-[10px] uppercase font-bold text-zinc-400">Qualidade & Velocidade</label>
@@ -687,7 +657,6 @@
                                 </div>
                             </div>
 
-                            <!-- Se NÃO Logado como Recrutador -->
                             <div v-else class="p-4 rounded-2xl bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/5 space-y-3">
                                 <div class="flex items-center gap-2 text-xs font-bold text-zinc-700 dark:text-zinc-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -699,7 +668,6 @@
                             </div>
                         </div>
 
-                        <!-- Botão de Ação -->
                         <div class="pt-4 relative z-10">
                             <button v-if="currentRecruiter" @click="startScreenShare"
                                 class="w-full py-4 rounded-2xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-sm tracking-wide shadow-xl shadow-red-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2">
@@ -714,7 +682,6 @@
                         </div>
                     </div>
 
-                    <!-- CARD 2: ENTRAR EM UMA TRANSMISSÃO (PRIVADO: APENAS CÓDIGO OU LINK) -->
                     <div class="card-base p-8 rounded-3xl flex flex-col justify-between space-y-6 relative overflow-hidden group">
                         <div class="space-y-5 relative z-10">
                             <div class="flex items-center justify-between">
@@ -734,7 +701,6 @@
                                 </p>
                             </div>
 
-                            <!-- Orientações de Acesso Privado -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                                 <div class="p-3 rounded-2xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 space-y-1">
                                     <div class="text-xs font-bold text-zinc-800 dark:text-zinc-200 flex items-center gap-1.5">
@@ -757,7 +723,6 @@
                                 </div>
                             </div>
 
-                            <!-- Campo de Entrada do Código -->
                             <div class="space-y-2 pt-2">
                                 <label class="text-[10px] uppercase font-bold text-zinc-400">Código da Sala ou Link</label>
                                 <input type="text" v-model="manualRoomCode" @keyup.enter="joinRoomByCode"
@@ -766,7 +731,6 @@
                             </div>
                         </div>
 
-                        <!-- Botão de Ação -->
                         <div class="pt-4 relative z-10">
                             <button @click="joinRoomByCode"
                                 class="w-full py-4 rounded-2xl bg-zinc-900 dark:bg-white text-white dark:text-black font-black text-sm tracking-wide shadow-lg hover:opacity-90 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer">
@@ -777,7 +741,6 @@
                     </div>
                 </div>
 
-                <!-- VISÃO EXCLUSIVA DO RECRUTADOR+: SALAS ABERTAS EM TEMPO REAL -->
                 <div v-if="currentRecruiter" class="card-base p-6 md:p-8 rounded-3xl border border-red-500/25 bg-zinc-900/40 backdrop-blur-xl space-y-5 shadow-2xl animate-fade-in relative overflow-hidden">
                     <div class="absolute -right-16 -top-16 w-56 h-56 bg-red-600/10 rounded-full blur-[60px] pointer-events-none"></div>
 
@@ -803,7 +766,6 @@
                         </span>
                     </div>
 
-                    <!-- Lista de Salas Ativas para o Recrutador -->
                     <div v-if="activeRooms.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 relative z-10">
                         <div v-for="room in activeRooms" :key="room.roomId"
                             class="p-4 rounded-2xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex flex-col justify-between gap-3 hover:border-red-500/40 hover:bg-zinc-200/40 dark:hover:bg-white/10 transition-all shadow-sm">
@@ -837,7 +799,6 @@
                         </div>
                     </div>
 
-                    <!-- Estado Vazio para o Recrutador -->
                     <div v-else class="p-6 rounded-2xl border border-dashed border-zinc-300 dark:border-white/10 text-center space-y-1 relative z-10">
                         <p class="text-xs font-bold text-zinc-700 dark:text-zinc-300">Nenhuma outra transmissão ativa no momento</p>
                         <p class="text-[10px] text-zinc-500">Quando outro recrutador abrir uma sala, ela aparecerá aqui para você.</p>
@@ -847,7 +808,6 @@
             </div>
         </div>
 
-        <!-- MODAL DE IDENTIFICAÇÃO: RECRUTADOR+ -->
         <div v-if="showRecruiterAuthModal"
             class="fixed inset-0 z-[250] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
             <div class="card-base p-6 md:p-8 rounded-3xl max-w-md w-full space-y-6 shadow-2xl relative border-red-500/30">
@@ -904,7 +864,6 @@
             </div>
         </div>
 
-        <!-- MODAL DE IDENTIFICAÇÃO DO ESPECTADOR (NOME OBRIGATÓRIO PARA ENTRAR NA SALA) -->
         <div v-if="showViewerNameModal"
             class="fixed inset-0 z-[260] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in">
             <div class="card-base p-6 md:p-8 rounded-3xl max-w-md w-full space-y-6 shadow-2xl relative border-zinc-200 dark:border-white/10">
@@ -949,7 +908,6 @@
             </div>
         </div>
 
-        <!-- MODAL DE ESPECTADORES CONECTADOS E LOG DE ACESSOS (HOST) -->
         <div v-if="showViewersModal"
             class="fixed inset-0 z-[120] bg-zinc-950/80 backdrop-blur-md flex items-center justify-center p-4">
             <div class="card-base p-6 rounded-3xl max-w-md w-full shadow-2xl border border-zinc-200 dark:border-white/10 space-y-5 animate-fade-in relative">
@@ -968,7 +926,6 @@
                     </button>
                 </div>
 
-                <!-- Alternador de Abas: Conectados Agora vs Histórico / Log de Quem Entrou -->
                 <div class="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-xs font-bold">
                     <button type="button" @click="viewersModalTab = 'live'"
                         :class="['flex-1 py-1.5 rounded-lg transition text-center cursor-pointer', (viewersModalTab || 'live') === 'live' ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200']">
@@ -980,7 +937,6 @@
                     </button>
                 </div>
 
-                <!-- Aba: Conectados Agora -->
                 <div v-if="(viewersModalTab || 'live') === 'live'" class="space-y-2 max-h-72 overflow-y-auto pr-1">
                     <div v-if="connectedViewersList.length === 0" class="p-8 text-center text-zinc-500 text-xs">
                         Nenhum espectador conectado no momento.
@@ -1006,7 +962,6 @@
                     </div>
                 </div>
 
-                <!-- Aba: Histórico / Log de Quem Entrou e Saiu -->
                 <div v-else class="space-y-2 max-h-72 overflow-y-auto pr-1">
                     <div v-if="viewersLog.length === 0" class="p-8 text-center text-zinc-500 text-xs">
                         Nenhum registro de acesso registrado até o momento.
@@ -1035,7 +990,6 @@
             </div>
         </div>
 
-        <!-- TOAST -->
         <div
             class="fixed bottom-20 md:bottom-6 right-0 md:right-6 z-[100] flex flex-col gap-2 px-4 md:px-0 pointer-events-none">
             <transition-group enter-active-class="animate-fade-in-up"
@@ -1057,7 +1011,6 @@
             </transition-group>
         </div>
 
-        <!-- HEADER (PAINEL DE GESTÃO) -->
         <header v-if="currentSection === 'management' && isAuthorized"
             class="h-16 shrink-0 z-50 px-4 md:px-8 flex items-center justify-between border-b transition-all duration-300 bg-white/70 border-zinc-200/50 dark:bg-[#050505]/70 dark:border-white/5 backdrop-blur-md sticky top-0">
             <div class="flex items-center gap-4 select-none cursor-pointer group" @click="view='import'">
@@ -1091,7 +1044,6 @@
                     <span class="text-[10px] text-zinc-500 font-bold uppercase tracking-wide">Offline</span>
                 </div>
 
-                <!-- MOVIDO: Indicador de Última Atualização para o Header -->
                 <div v-if="lastUpdated"
                     class="hidden md:flex flex-col items-end ml-4 border-l border-zinc-200 dark:border-white/10 pl-4">
                     <span class="text-[9px] font-bold uppercase text-zinc-400">Dados Atualizados</span>
@@ -1128,7 +1080,6 @@
                     SORTEIO
                 </button>
 
-                <!-- Botão Voltar para Transmissão -->
                 <button @click="navigateToScreenshare"
                     class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-100 dark:bg-white/5 hover:bg-red-500/10 hover:text-red-500 border border-zinc-200 dark:border-white/10 text-xs font-bold text-zinc-600 dark:text-zinc-300 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -1174,7 +1125,6 @@
                     <span class="hidden sm:inline tracking-wide">CONFIG</span>
                 </button>
 
-                <!-- Botão Sair / Bloquear Gestão -->
                 <button @click="logoutManagement" title="Bloquear / Sair do Painel de Gestão"
                     class="p-2 rounded-lg text-zinc-400 hover:text-red-500 hover:bg-red-500/10 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -1187,7 +1137,6 @@
             </div>
         </header>
 
-        <!-- MOBILE NAV -->
         <nav v-if="currentSection === 'management' && isAuthorized"
             class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-md border-t border-zinc-200 dark:border-white/10 flex justify-between items-center px-6 py-4 z-[60] safe-area-pb">
             <button v-for="item in menuItems" :key="item.id + 'mob'" @click="view = item.id"
@@ -1216,13 +1165,10 @@
 
             <div class="relative z-10 max-w-7xl mx-auto h-full">
 
-                <!-- 1. VIEW: IMPORTAR (REMOVIDO - AUTOMATIZADO) -->
-                <!-- A transição envolve todas as views -->
                 <transition name="fade" mode="out-in">
 
-                    <!-- 2. VIEW: VISÃO GERAL -->
                     <div v-if="view === 'overview'" key="overview" class="space-y-4 md:space-y-6 pb-20">
-                        <!-- BANNER GERENCIAR TRANSMISSÕES ATIVAS (EXCLUSIVO GESTÃO) -->
+                        
                         <div v-if="activeRooms.length > 0" class="mx-2 p-4 rounded-2xl bg-gradient-to-r from-red-600/15 via-red-950/20 to-black border border-red-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg animate-fade-in">
                             <div class="flex items-center gap-3">
                                 <div class="w-3 h-3 rounded-full bg-red-500 animate-ping"></div>
@@ -1264,7 +1210,6 @@
                                 color="text-purple-600 dark:text-purple-500"></kpi-card>
                         </div>
 
-                        <!-- META DE VENDAS -->
                         <div
                             class="card-base rounded-xl p-4 bg-gradient-to-br from-white to-gray-50 dark:from-[#111] dark:to-black border border-zinc-200 dark:border-white/5 relative overflow-hidden group">
                             <div
@@ -1468,7 +1413,6 @@
                         </div>
                     </div>
 
-                    <!-- 3. VIEW: TABELA VENDAS -->
                     <div v-else-if="view === 'sales'" key="sales"
                         class="flex flex-col h-[calc(100dvh-130px)] md:h-[calc(100vh-100px)] pb-6">
                         <div class="flex justify-between items-end shrink-0 mb-4">
@@ -1515,7 +1459,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. VIEW: HORAS -->
                     <div v-else-if="view === 'hours'" key="hours"
                         class="flex flex-col h-[calc(100dvh-130px)] md:h-[calc(100vh-100px)] pb-6">
                         <div class="flex justify-between items-end shrink-0 mb-4">
@@ -1533,7 +1476,6 @@
                                     </svg><span class="hidden md:inline">TXT Top Horas</span></button></div>
                         </div>
 
-                        <!-- STATS BAR: Total Membros + Cargos -->
                         <div class="flex flex-wrap items-center gap-3 shrink-0 mb-4 px-1">
                             <div
                                 class="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 px-3 py-1.5 rounded-full">
@@ -1594,7 +1536,6 @@
                         </div>
                     </div>
 
-                    <!-- VIEW POINTS -->
                     <div v-else-if="view === 'points'" key="points"
                         class="flex flex-col md:h-[calc(100vh-100px)] space-y-6 pb-6">
                         <div
@@ -1690,7 +1631,7 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 flex-1 overflow-y-auto custom-scroll pb-20 md:pb-4 mt-6 md:mt-8">
-                            <!-- Recrutamento + Treinamentos -->
+                            
                             <div
                                 class="card-base rounded-xl p-0 overflow-hidden flex flex-col min-h-[400px]">
                                 <div
@@ -1813,7 +1754,6 @@
                                 </div>
                             </div>
 
-                            <!-- Farm REVISADO -->
                             <div
                                 class="card-base rounded-xl p-0 overflow-hidden flex flex-col min-h-[400px] mb-0">
                                 <div
@@ -1879,8 +1819,6 @@
                                         class="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 rounded-lg text-xs font-bold transition">Add</button>
                                 </div>
 
-
-
                                 <div class="p-2 overflow-x-auto min-h-[150px] flex-1 custom-scroll">
                                     <table class="w-full text-sm">
                                         <thead class="text-[10px] text-zinc-500 uppercase font-bold">
@@ -1927,7 +1865,7 @@
 
                     <div v-else-if="view === 'hierarchy'" key="hierarchy"
                         class="flex flex-col h-[calc(100dvh-130px)] md:h-[calc(100vh-100px)] pb-6 md:flex-row md:gap-6">
-                        <!-- Desktop Sidebar -->
+                        
                         <div
                             class="hidden md:flex w-full md:w-1/3 card-base rounded-xl p-4 md:p-6 flex-col gap-4 h-fit">
                             <h3 class="font-bold text-zinc-800 dark:text-white uppercase text-sm tracking-wider">🛠️
@@ -1964,7 +1902,7 @@
                         </div>
 
                         <div class="w-full card-base rounded-xl p-0 overflow-hidden flex flex-col flex-1 md:h-full">
-                            <!-- HEADER HIERARQUIA + OPÇÕES NO TOPO (MOBILE ONLY) -->
+                            
                             <div
                                 class="md:hidden bg-gray-50 dark:bg-zinc-900/50 border-b border-zinc-200 dark:border-white/5 p-3 flex justify-between items-center shrink-0">
                                 <div class="flex items-center gap-2">
@@ -1999,7 +1937,7 @@
                                         </svg>Copiar</button>
                                 </div>
                             </div>
-                            <!-- DESKTOP HEADER -->
+                            
                             <div
                                 class="hidden md:flex bg-gray-50 dark:bg-zinc-900/50 border-b border-zinc-200 dark:border-white/5 p-3">
                                 <span class="text-[10px] font-mono text-zinc-500 flex items-center gap-2">
@@ -2013,11 +1951,9 @@
                         </div>
                     </div>
 
-                    <!-- 7. VIEW: ADMIN -->
                     <div v-else-if="view === 'admin'" key="admin"
                         class="flex flex-col h-[calc(100dvh-130px)] md:h-[calc(100vh-100px)] pb-6 w-full max-w-7xl mx-auto">
 
-                        <!-- LOGIN (SEM CARD DE FUNDO) -->
                         <div v-if="!isAdmin" key="admin-login"
                             class="flex flex-col items-center justify-center h-full min-h-[400px]">
                             <div
@@ -2054,7 +1990,6 @@
                             </div>
                         </div>
 
-                        <!-- CONTEÚDO ADMIN (SE LOGADO) -->
                         <div v-else key="admin-panel" class="card-base rounded-xl overflow-hidden flex-1 flex flex-col shadow-2xl">
                             <div
                                 class="p-4 md:p-6 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center bg-gray-50 dark:bg-zinc-900/50 shrink-0">
@@ -2084,7 +2019,6 @@
                             </div>
                             <div class="p-4 md:p-8 overflow-y-auto custom-scroll flex-1 space-y-8">
 
-                                <!-- 1. PARÂMETROS GLOBAIS -->
                                 <div>
                                     <h3 class="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4 flex items-center gap-2">
                                         <i data-lucide="sliders" class="w-4 h-4 text-blue-500"></i>
@@ -2110,7 +2044,6 @@
                                     </div>
                                 </div>
 
-                                <!-- 2. GERENCIAR CARGOS RECRUTADORES -->
                                 <div class="bg-purple-500/5 border border-purple-500/20 rounded-2xl p-5 md:p-6 space-y-4">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-2.5">
@@ -2144,7 +2077,6 @@
                                     </div>
                                 </div>
 
-                                <!-- 3. BOOSTERS ATIVOS (APENAS LEITURA) -->
                                 <div class="bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-900/30 rounded-2xl p-5 md:p-6 space-y-3">
                                     <div class="flex items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -2173,9 +2105,8 @@
                                     <p v-else class="text-xs text-zinc-500 italic">Nenhum booster sincronizado.</p>
                                 </div>
 
-                                <!-- 4. SEGURANÇA E ACESSOS -->
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <!-- Senha Admin -->
+                                    
                                     <div class="p-5 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 rounded-2xl">
                                         <div class="flex items-center gap-4">
                                             <div class="flex-1">
@@ -2193,7 +2124,7 @@
                                                 </svg></div>
                                         </div>
                                     </div>
-                                    <!-- Senha do Painel de Gestão -->
+                                    
                                     <div class="p-5 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-900/30 rounded-2xl">
                                         <div class="flex items-center gap-4">
                                             <div class="flex-1">
@@ -2211,7 +2142,7 @@
                                                 </svg></div>
                                         </div>
                                     </div>
-                                    <!-- PIN de Transmissão (Recrutador+) -->
+                                    
                                     <div class="p-5 bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-900/30 rounded-2xl md:col-span-2">
                                         <div class="flex items-center gap-4">
                                             <div class="flex-1">
@@ -2230,7 +2161,6 @@
                                     </div>
                                 </div>
 
-                                <!-- 5. CARGOS & METAS -->
                                 <div class="border-t border-zinc-200 dark:border-white/5 pt-8">
                                     <div class="flex justify-between items-center mb-6">
                                         <div>
@@ -2298,7 +2228,6 @@
                                     </div>
                                 </div>
 
-                                <!-- 6. TRANSMISSÕES AO VIVO (SCREENSHARE) -->
                                 <div class="border-t border-zinc-200 dark:border-white/5 pt-8">
                                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
                                         <div>
@@ -2322,7 +2251,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Lista de Salas Registradas -->
                                     <div class="space-y-3">
                                         <div v-if="allRooms.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                             <div v-for="room in allRooms" :key="room.roomId"
@@ -2376,7 +2304,6 @@
             </div>
         </main>
 
-        <!-- MODAL META DE VENDAS -->
         <div v-if="showKitsGoalModal"
             class="fixed inset-0 z-[200] bg-zinc-900/80 dark:bg-[#050505]/90 backdrop-blur-xl flex items-center justify-center p-4 w-full h-full overflow-hidden animate-fade-in">
             <div class="card-base p-6 rounded-2xl max-w-sm w-full flex flex-col gap-6 shadow-2xl relative overflow-hidden group">
@@ -2412,10 +2339,9 @@
             </div>
         </div>
 
-        <!-- MODAL SORTEIO (MOVED TO ROOT) -->
         <div v-if="showRaffleModal"
             class="fixed inset-0 z-[200] bg-[#050505] text-white flex flex-col overflow-hidden animate-fade-in font-sans">
-            <!-- Background Effects -->
+            
             <div
                 class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-red-900/30 via-[#050505] to-[#000]">
             </div>
@@ -2425,7 +2351,6 @@
             <div class="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-red-900/50 to-transparent">
             </div>
 
-            <!-- Header / Nav -->
             <div class="relative z-20 flex justify-between items-center p-6 md:p-8">
                 <div class="flex items-center gap-4">
                     <div
@@ -2457,11 +2382,9 @@
                 </button>
             </div>
 
-            <!-- Main Content -->
             <div
                 class="relative z-10 flex-1 flex flex-col items-center justify-center p-6 overflow-y-auto custom-scroll">
 
-                <!-- Title Section -->
                 <div class="text-center mb-12 transform transition-all duration-700 hover:scale-105">
                     <h1
                         class="text-5xl md:text-7xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600 mb-2 drop-shadow-2xl">
@@ -2473,7 +2396,6 @@
 
                 <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
 
-                    <!-- Config Section -->
                     <div class="space-y-6 bg-zinc-900/30 p-8 rounded-3xl border border-white/5 backdrop-blur-sm">
                         <div class="space-y-2">
                             <label
@@ -2527,7 +2449,6 @@
                         </button>
                     </div>
 
-                    <!-- Results Section -->
                     <div v-if="raffleWinners.length > 0"
                         class="relative bg-gradient-to-br from-[#0a0a0a] to-[#111] p-8 rounded-3xl border border-red-900/30 flex flex-col items-center justify-center min-h-[300px] animate-fade-in shadow-[0_0_50px_-10px_rgba(220,38,38,0.15)]">
                         <div class="absolute top-0 right-0 p-4">
@@ -2535,7 +2456,6 @@
                                 class="text-[10px] font-bold text-zinc-600 hover:text-red-500 uppercase tracking-widest transition">Limpar</button>
                         </div>
 
-                        <!-- Confetti effect placeholder could go here -->
                         <h3
                             class="text-red-600 font-black italic uppercase tracking-widest mb-8 text-center border-b border-red-900/30 pb-4 w-full">
                             Vencedores Confirmados</h3>
@@ -2557,7 +2477,6 @@
                         </div>
                     </div>
 
-                    <!-- Placeholder if no winners -->
                     <div v-else
                         class="hidden md:flex flex-col items-center justify-center h-full min-h-[300px] border-2 border-dashed border-zinc-900 rounded-3xl p-8 opacity-30">
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
@@ -2572,7 +2491,6 @@
                 </div>
             </div>
 
-            <!-- Footer -->
             <div class="p-4 text-center">
                 <p class="text-[10px] font-bold text-zinc-800 uppercase tracking-[0.2em]">Redline Manager &copy; 2026
                 </p>
@@ -2580,7 +2498,6 @@
         </div>
     </div>
 
-    <!-- VUE JS LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -2611,17 +2528,15 @@
         createApp({
             components: { KpiCard },
             setup() {
-                // TELA INICIAL / GESTÃO ROUTING STATE
-                const currentSection = ref('screenshare'); // 'screenshare' ou 'management'
+                
+                const currentSection = ref('screenshare'); 
 
-                // RECRUTADOR+ IDENTIFICAÇÃO STATE
                 const currentRecruiter = ref(null);
                 const showRecruiterAuthModal = ref(false);
                 const recruiterInputId = ref('');
                 const recruiterInputPassword = ref('');
                 const recruiterAuthError = ref('');
 
-                // SERVIDORES ICE RESILIENTES (STUN GOOGLE/CLOUDFLARE/TWILIO/MOZILLA + TURN OPENRELAY UDP/TCP/TLS 443 PARA VENCER CGNAT E FIREWALLS)
                 const ICE_SERVERS = [
                     { urls: 'stun:stun.l.google.com:19302' },
                     { urls: 'stun:stun1.l.google.com:19302' },
@@ -2646,7 +2561,6 @@
                     }
                 ];
 
-                // TRANSMISSÃO SCREENSHARE (HOST) STATE
                 let hostPeer = null;
                 let hostConnections = [];
                 const hostMediaCalls = new Map();
@@ -2657,12 +2571,11 @@
                 const connectedViewersCount = ref(0);
                 const connectedViewersList = ref([]);
                 const viewersLog = ref([]);
-                const viewersModalTab = ref('live'); // 'live' ou 'log'
+                const viewersModalTab = ref('live'); 
                 const streamTitle = ref('Transmissão de Recrutamento');
                 const streamFps = ref(30);
-                const streamQuality = ref('fast'); // 'fast' (720p 30fps), 'balanced' (1080p 30fps), 'high' (1080p 60fps)
+                const streamQuality = ref('fast'); 
 
-                // ASSISTIR SCREENSHARE (VIEWER) STATE
                 let viewerPeer = null;
                 let viewerConn = null;
                 let viewerTimeoutTimer = null;
@@ -2684,7 +2597,7 @@
                 const showViewersModal = ref(false);
                 const pendingRoomToJoin = ref(null);
 
-                const view = ref('overview'); // INICIA EM OVERVIEW
+                const view = ref('overview'); 
                 const rawData = ref('');
                 const processedData = ref([]);
                 const calcSearchId = ref('');
@@ -2716,8 +2629,7 @@
                     firebaseConfig = JSON.parse(__firebase_config);
                     if (typeof __app_id !== 'undefined') appId = __app_id;
                 } else {
-                    // --- CONFIGURAÇÃO FIREBASE ---
-                    // Substitua pelos dados do seu projeto Firebase Console
+
                     firebaseConfig = {
                         apiKey: "SUA_API_KEY_AQUI",
                         authDomain: "SEU_PROJETO.firebaseapp.com",
@@ -2742,8 +2654,8 @@
                 }
 
                 const menuItems = [
-                    // REMOVIDO: Importar
-                    { id: 'overview', label: 'Visão Geral', icon: 'layout-grid', disabled: false }, // Habilitado por padrão
+                    
+                    { id: 'overview', label: 'Visão Geral', icon: 'layout-grid', disabled: false }, 
                     { id: 'sales', label: 'Vendas', icon: 'coins', disabled: true },
                     { id: 'hours', label: 'Horas', icon: 'clock', disabled: true },
                     { id: 'points', label: 'Pontos', icon: 'star', disabled: true },
@@ -2789,7 +2701,6 @@
                     if (localStorage.getItem('redline_theme') === 'light') { isDark.value = false; updateTheme(); }
                     if (localStorage.getItem('redline_auth_ok') === 'true') isAuthorized.value = true;
 
-                    // Restaura sessão de recrutador salva
                     const savedRecruiter = localStorage.getItem('redline_recruiter_user');
                     if (savedRecruiter) {
                         try {
@@ -2799,7 +2710,6 @@
                         }
                     }
 
-                    // Verifica hash da URL (ex: #sala=XXX ou #gestao)
                     window.addEventListener('hashchange', checkUrlHash);
                     checkUrlHash();
 
@@ -2814,7 +2724,7 @@
                         onAuthStateChanged(auth, (currentUser) => {
                             user.value = currentUser;
                             if (currentUser) {
-                                // Snapshot para salas de transmissão em tempo real (com detecção de heartbeat contra salas fantasmas)
+                                
                                 try {
                                     const roomsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'redline_storage', 'screenshare_rooms');
                                     onSnapshot(roomsDocRef, (snap) => {
@@ -2835,7 +2745,7 @@
                                                 activeRooms.value = [];
                                             }
                                         }
-                                        // Interrupção instantânea caso a sala assistida tenha sido encerrada ou perdido o sinal
+                                        
                                         if (isWatching.value && currentWatchingRoom.value) {
                                             const currentWatchingId = currentWatchingRoom.value.roomId;
                                             const isStillLive = activeRooms.value.some(r => r.roomId === currentWatchingId);
@@ -2847,7 +2757,6 @@
                                         }
                                     });
 
-                                    // Pruner periódico local a cada 15 segundos para manter as salas ativas sempre sincronizadas
                                     setInterval(() => {
                                         if (allRooms.value && allRooms.value.length > 0) {
                                             const now = Date.now();
@@ -2867,7 +2776,6 @@
                                     if (docSnap.exists()) {
                                         const data = docSnap.data();
 
-                                        // LOAD ORDER FIXED: Config -> Manual Data -> Raw Data -> PROCESS
                                         if (data.config) {
                                             const defaultRecruiterRanks = ['DONO', 'DIR', 'GER', 'CONS', 'SUP', 'REC'];
                                             const recRanks = (Array.isArray(data.config.recruiterRanks) && data.config.recruiterRanks.length > 0)
@@ -2881,7 +2789,7 @@
                                                 recruiterPin: data.config.recruiterPin || config.value.recruiterPin || 'recrutador',
                                                 recruiterRanks: recRanks
                                             };
-                                            // Patch automático caso o banco traga a configuração antiga onde SUP estava acima de CONS
+                                            
                                             if (config.value.ranks) {
                                                 const consIdx = config.value.ranks.findIndex(r => r.tag === 'CONS');
                                                 const supIdx = config.value.ranks.findIndex(r => r.tag === 'SUP');
@@ -2890,7 +2798,7 @@
                                                     config.value.ranks[consIdx].order = config.value.ranks[supIdx].order;
                                                     config.value.ranks[supIdx].order = tempOrder;
                                                 }
-                                                // Re-ordena o array por precaução
+                                                
                                                 config.value.ranks.sort((a, b) => a.order - b.order);
                                             }
                                         }
@@ -2898,7 +2806,7 @@
                                         if (data.boostersData) { boostersData.value = data.boostersData; }
                                         if (data.donosData) { donosData.value = data.donosData; }
                                         if (data.rawData) { rawData.value = data.rawData; }
-                                        // Carrega Meta do Baú (se existir)
+                                        
                                         if (data.chestGoal) chestGoal.value = parseInt(data.chestGoal) || 5000;
                                         if (data.kitsGoal) kitsGoal.value = parseInt(data.kitsGoal) || 5000;
 
@@ -2906,7 +2814,6 @@
                                             lastUpdated.value = new Date(data.updatedAt).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
                                         }
 
-                                        // Process only after everything is loaded
                                         processData();
                                     }
                                     document.getElementById('loader').style.display = 'none';
@@ -2938,7 +2845,7 @@
                         localStorage.setItem('redline_auth_ok', 'true');
                         inputAdminPin.value = '';
                         showToast('Acesso concedido!', 'success');
-                        // Força atualização da UI caso haja algum lag
+                        
                         nextTick(() => { refreshUI(); });
                     } else {
                         showToast('Senha incorreta!', 'error');
@@ -2954,7 +2861,6 @@
                     } else { showToast('Senha incorreta.', 'error'); }
                 };
 
-                // NAVEGAÇÃO ENTRE SEÇÕES
                 const checkUrlHash = () => {
                     const hash = window.location.hash;
                     if (hash.startsWith('#sala=')) {
@@ -3003,8 +2909,6 @@
                     showToast('Você saiu do Painel de Gestão.', 'info');
                 };
 
-
-                // AUTENTICAÇÃO E RESTRIÇÃO: RECRUTADOR+ / DONO (ID CADASTRADO NO PAINEL + SENHA DE ENTRADA)
                 const checkRecruiterAuth = () => {
                     recruiterAuthError.value = '';
                     const trimmedId = (recruiterInputId.value || '').trim();
@@ -3020,7 +2924,6 @@
                         return;
                     }
 
-                    // 1. Validação da Senha de Transmissão ou Senha Master de Admin
                     const validPassword = config.value.recruiterPin || 'recrutador';
                     const isAdminPinUsed = (enteredPassword === config.value.adminPin);
                     const isPasswordCorrect = (enteredPassword === validPassword) || isAdminPinUsed;
@@ -3029,14 +2932,12 @@
                         return;
                     }
 
-                    // 2. Validação do ID no Painel (deve constar no painel, fallback de donos ou ser Recrutador+)
                     let member = processedData.value.find(m =>
                         String(m.discordId).trim() === trimmedId ||
                         String(m.ingameId).trim() === trimmedId ||
                         (m.cleanName && m.cleanName.toLowerCase() === trimmedId.toLowerCase())
                     );
 
-                    // Fallback para Donos caso o Dono não esteja no rawData do Excel
                     if (!member) {
                         const allKnownOwners = (donosData.value && donosData.value.length > 0) ? [...donosData.value] : [
                             { id: '352145423181414401', name: 'Dono 1' },
@@ -3059,7 +2960,7 @@
                                 emoji: '👑'
                             };
                         } else if (isAdminPinUsed) {
-                            // Se a senha de administrador foi digitada, autoriza como Dono/Admin
+                            
                             member = {
                                 discordId: trimmedId,
                                 ingameId: trimmedId,
@@ -3076,13 +2977,11 @@
                         return;
                     }
 
-                    // 3. Validação do Cargo: Recrutador ou superior (Dono sempre permitido)
                     if (!isRecruiterRank(member.roleTag) && member.roleTag !== 'DONO' && member.roleTag !== 'DIR' && member.roleTag !== 'GER') {
                         recruiterAuthError.value = `O membro ${member.cleanName} possui o cargo "${member.role}", que não tem permissão de Recrutador+.`;
                         return;
                     }
 
-                    // Sucesso: ID no painel com cargo Recrutador+ / Dono E senha correta!
                     currentRecruiter.value = {
                         id: member.discordId || member.ingameId,
                         name: member.cleanName,
@@ -3108,7 +3007,6 @@
                     refreshUI();
                 };
 
-                // NOTIFICAÇÃO SONORA DE ENTRADA (CHIME VIA WEB AUDIO API)
                 const playJoinNotification = () => {
                     try {
                         const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -3119,8 +3017,8 @@
                         const gain = ctx.createGain();
 
                         osc.type = 'sine';
-                        osc.frequency.setValueAtTime(659.25, now); // E5
-                        osc.frequency.setValueAtTime(987.77, now + 0.12); // B5
+                        osc.frequency.setValueAtTime(659.25, now); 
+                        osc.frequency.setValueAtTime(987.77, now + 0.12); 
 
                         gain.gain.setValueAtTime(0, now);
                         gain.gain.linearRampToValueAtTime(0.18, now + 0.03);
@@ -3134,7 +3032,6 @@
                     } catch (e) {}
                 };
 
-                // GESTÃO E FINALIZAÇÃO DE SALAS (EXCLUSIVO DO PAINEL DE GESTÃO)
                 const forceCloseRoom = async (targetRoom) => {
                     if (!isAuthorized.value && !isAdmin.value) {
                         showToast('Acesso negado. Ação restrita ao Painel de Gestão.', 'error');
@@ -3217,7 +3114,6 @@
                     }
                 };
 
-                // AUTO-LIMPEZA AO FECHAR ABA
                 window.addEventListener('beforeunload', () => {
                     if (isStreaming.value && currentRoomId.value) {
                         syncRoomToFirestore(currentRoomId.value, false);
@@ -3229,7 +3125,6 @@
                     }
                 });
 
-                // HEARTBEAT DO TRANSMISSOR PARA EVITAR SALAS FANTASMAS (100% GRATUITO)
                 const sendHeartbeat = async (rId) => {
                     if (!db || !appId || !isStreaming.value || currentRoomId.value !== rId) return;
                     try {
@@ -3246,7 +3141,6 @@
                     } catch (e) {}
                 };
 
-                // SINCRONIZAÇÃO DE SALAS NO FIRESTORE
                 const syncRoomToFirestore = async (roomId, isLive) => {
                     if (!db || !appId) return;
                     try {
@@ -3280,7 +3174,6 @@
                     }
                 };
 
-                // TRANSMISSÃO (HOST)
                 const startScreenShare = async () => {
                     if (!currentRecruiter.value) {
                         showRecruiterAuthModal.value = true;
@@ -3320,7 +3213,6 @@
                             });
                         }
 
-                        // Otimização de nitidez para texto e telas no WebRTC
                         try {
                             const vTrack = stream.getVideoTracks()[0];
                             if (vTrack && 'contentHint' in vTrack) {
@@ -3330,7 +3222,6 @@
 
                         activeStream.value = stream;
 
-                        // Se o usuário clicar em "Parar Compartilhamento" na barra nativa do navegador
                         stream.getVideoTracks()[0].onended = () => {
                             stopScreenShare();
                         };
@@ -3367,7 +3258,6 @@
                                 viewersLog.value = [];
                                 syncRoomToFirestore(roomId, true);
 
-                                // Inicia o pulso de heartbeat para manter a sala ativa e evitar salas fantasmas
                                 if (hostHeartbeatTimer) clearInterval(hostHeartbeatTimer);
                                 hostHeartbeatTimer = setInterval(() => {
                                     sendHeartbeat(roomId);
@@ -3391,7 +3281,6 @@
                                 }
                             });
 
-                            // Envio limpo e controlado de fluxo para o espectador sem colisões WebRTC
                             const callViewer = (peerId) => {
                                 if (!activeStream.value || !activeStream.value.active) {
                                     console.warn('[Screenshare] Fluxo de vídeo inativo. Não foi possível chamar:', peerId);
@@ -3493,7 +3382,7 @@
                                 }
                             });
                         } else {
-                            // Fallback local caso PeerJS não carregue
+                            
                             isStreaming.value = true;
                             nextTick(() => {
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3518,7 +3407,7 @@
                         clearInterval(hostHeartbeatTimer);
                         hostHeartbeatTimer = null;
                     }
-                    // 1. Avisa TODOS os espectadores conectados imediatamente pelo data channel
+                    
                     if (Array.isArray(hostConnections) && hostConnections.length > 0) {
                         hostConnections.forEach(conn => {
                             try {
@@ -3529,13 +3418,11 @@
                         hostConnections = [];
                     }
 
-                    // Fecha chamadas de mídia ativas
                     hostMediaCalls.forEach(call => {
                         try { call.close(); } catch (e) {}
                     });
                     hostMediaCalls.clear();
 
-                    // 2. Para a captura de vídeo/áudio da tela
                     if (activeStream.value) {
                         activeStream.value.getTracks().forEach(track => {
                             try { track.stop(); } catch (e) {}
@@ -3543,13 +3430,11 @@
                         activeStream.value = null;
                     }
 
-                    // 3. Destrói o Peer do Host
                     if (hostPeer) {
                         try { hostPeer.destroy(); } catch (e) {}
                         hostPeer = null;
                     }
 
-                    // 4. Marca como finalizada no Firestore
                     if (currentRoomId.value) {
                         syncRoomToFirestore(currentRoomId.value, false);
                         currentRoomId.value = '';
@@ -3562,7 +3447,6 @@
                     showToast('Transmissão encerrada com sucesso.', 'info');
                 };
 
-                // ALTERAÇÃO DINÂMICA DE QUALIDADE DURANTE A TRANSMISSÃO
                 const changeStreamQuality = async (newQuality) => {
                     streamQuality.value = newQuality;
                     if (newQuality === 'fast') {
@@ -3606,7 +3490,6 @@
                         }
                     }
 
-                    // Avisa todos os espectadores conectados via DataChannel
                     if (Array.isArray(hostConnections) && hostConnections.length > 0) {
                         hostConnections.forEach(conn => {
                             try {
@@ -3618,7 +3501,6 @@
                         });
                     }
 
-                    // Atualiza a qualidade da sala no Firestore para novos espectadores
                     if (currentRoomId.value && db && appId) {
                         try {
                             const roomsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'redline_storage', 'screenshare_rooms');
@@ -3633,7 +3515,6 @@
                     }
                 };
 
-                // IDENTIFICAÇÃO E ASSISTIR (VIEWER)
                 const requestJoinRoom = (room) => {
                     pendingRoomToJoin.value = room;
                     if (!viewerName.value) {
@@ -3762,7 +3643,6 @@
                         requestStreamInterval = null;
                     }
 
-                    // Timeout inteligente de 15 segundos com diagnóstico detalhado
                     viewerTimeoutTimer = setTimeout(() => {
                         if (!isViewerConnected.value && isWatching.value) {
                             viewerConnectionError.value = 'A conexão demorou para responder. O transmissor pode estar offline, ou sua rede (CGNAT/Firewall) bloqueou a rota P2P.';
@@ -3803,7 +3683,6 @@
                                 });
                             } catch (e) {}
 
-                            // Se em 2.5s o vídeo ainda não tiver chegado, envia retry automático (até 3 vezes)
                             requestStreamInterval = setInterval(() => {
                                 if (isViewerConnected.value) {
                                     clearInterval(requestStreamInterval);
@@ -3864,7 +3743,6 @@
                         viewerStatusMessage.value = 'Recebendo fluxo de vídeo...';
                         call.answer();
 
-                        // Monitora o estado da conexão ICE nativa
                         if (call.peerConnection) {
                             call.peerConnection.oniceconnectionstatechange = () => {
                                 const state = call.peerConnection.iceConnectionState;
@@ -3892,7 +3770,6 @@
                             }
                             viewerConnectionError.value = '';
 
-                            // Se o transmissor parar o compartilhamento nativo na tela dele, encerra imediatamente
                             if (remoteStream.getVideoTracks() && remoteStream.getVideoTracks()[0]) {
                                 remoteStream.getVideoTracks()[0].onended = () => {
                                     console.log('[Screenshare] Track de vídeo remota finalizada.');
@@ -3960,14 +3837,13 @@
                         showToast('Por favor, informe o código da sala ou link.', 'error');
                         return;
                     }
-                    // Se o usuário colou a URL inteira (ex: https://...#sala=redline-1234), extrai o ID limpo
+                    
                     if (code.includes('#sala=')) {
                         code = code.split('#sala=')[1].split('&')[0].trim();
                     } else if (code.includes('sala=')) {
                         code = code.split('sala=')[1].split('&')[0].trim();
                     }
 
-                    // Busca metadados da sala no mapa de salas se existir
                     const existingRoom = (allRoomsMap.value && allRoomsMap.value[code]) || (activeRooms.value && activeRooms.value.find(r => r.roomId === code));
                     const roomPayload = existingRoom ? {
                         roomId: existingRoom.roomId,
@@ -4019,7 +3895,6 @@
                     }
                 };
 
-                // UTILITÁRIOS DO PLAYER
                 const copyShareLink = () => {
                     const url = `${window.location.origin}${window.location.pathname}#sala=${currentRoomId.value}`;
                     navigator.clipboard.writeText(url).then(() => {
@@ -4121,7 +3996,7 @@
                 const totalImposto = computed(() => processedData.value.reduce((a, b) => a + b.imposto, 0));
                 const totalLucro = computed(() => processedData.value.reduce((a, b) => a + b.lucro, 0));
                 const totalKits = computed(() => processedData.value.reduce((a, b) => a + b.kits, 0));
-                // Total Farmado (Soma de farmStatus de quem está ativo na lista)
+                
                 const totalFarmado = computed(() => activeFarmers.value.reduce((a, b) => a + (Number(b.farmStatus) || 0), 0));
                 const totalMovimentado = computed(() => totalKits.value * config.value.kitPrice);
                 const totalSalarioRecrutadores = computed(() => processedData.value.reduce((a, b) => a + b.recruitSalary, 0));
@@ -4129,7 +4004,7 @@
                 const IGNORED_USERS_LIST = ['713774125151289385'];
 
                 const dataByRank = computed(() => config.value.ranks.map(rank => {
-                    // FILTER: Exclude (Exonerado) and IGNORED_USERS from Hours/Hierarchy groupings
+                    
                     const members = processedData.value.filter(m => (m.roleTag || '').toUpperCase() === (rank.tag || '').toUpperCase() && !m.cleanName.toLowerCase().includes('(exonerado)') && !IGNORED_USERS_LIST.includes(m.discordId));
                     const totalHours = members.reduce((acc, curr) => acc + curr.hours, 0);
                     const totalMoney = members.reduce((acc, curr) => acc + curr.lucro, 0);
@@ -4144,8 +4019,8 @@
                         : defaultRecruiterRanks;
                     const eligibleTags = ranks.map(t => (t || '').toUpperCase());
                     return processedData.value.filter(m => {
-                        if (m.cleanName.toLowerCase().includes('(exonerado)')) return false; // Hide Exonerated
-                        // Se o membro já possui pontuação/recrutamento registrado, sempre exibe na tabela para nunca perder visibilidade
+                        if (m.cleanName.toLowerCase().includes('(exonerado)')) return false; 
+                        
                         const hasActivePoints = (m.recruitCount > 0 || m.sponsorCount > 0 || (m.treinamentoEsp || 0) > 0 || (m.provaEsp || 0) > 0 || (m.provaEng || 0) > 0);
                         if (hasActivePoints) return true;
                         if (!eligibleTags.includes((m.roleTag || '').toUpperCase())) return false;
@@ -4187,7 +4062,7 @@
                 const activeFarmers = computed(() => processedData.value.filter(m => m.farmStatus > 0));
                 const selectFarmer = (m) => { selectedFarmer.value = m; farmSearch.value = `${m.cleanName}`; };
 
-                let autoSaveTimer = null; // Timer para o debounce
+                let autoSaveTimer = null; 
 
                 const updateManualData = (m) => {
                     if (!manualData.value[m.discordId]) manualData.value[m.discordId] = {};
@@ -4199,26 +4074,23 @@
                         provaEsp: parseInt(m.provaEsp) || 0,
                         provaEng: parseInt(m.provaEng) || 0
                     };
-                    // Atualiza a tela
+                    
                     processData();
 
-                    // NOVO: Salvar automático com delay (debounce)
                     clearTimeout(autoSaveTimer);
-                    isSaving.value = true; // Feedback visual imediato
+                    isSaving.value = true; 
                     autoSaveTimer = setTimeout(() => {
                         saveDataToCloud();
-                    }, 1000); // Salva após 1 segundo sem digitar
+                    }, 1000); 
                 };
 
-                // FARM LOGIC UPDATED WITH AUTO-SAVE
                 const addFarmer = () => {
                     if (selectedFarmer.value) {
                         selectedFarmer.value.farmStatus = selectedFarmType.value;
                         updateManualData(selectedFarmer.value);
                         selectedFarmer.value = null;
                         farmSearch.value = '';
-                        // O updateManualData já chama o save via debounce, mas aqui podemos forçar
-                        // para garantir resposta imediata em botões
+
                         clearTimeout(autoSaveTimer);
                         saveDataToCloud();
                     }
@@ -4227,13 +4099,12 @@
                 const removeFarmer = (m) => {
                     m.farmStatus = 0;
                     updateManualData(m);
-                    // Forçar save imediato
+                    
                     clearTimeout(autoSaveTimer);
                     saveDataToCloud();
                 };
 
                 const clearFarmers = () => {
-                    // REMOVIDO: if(!confirm("Tem certeza que deseja limpar toda a lista de Farm?")) return;
 
                     activeFarmers.value.forEach(m => {
                         m.farmStatus = 0;
@@ -4243,16 +4114,14 @@
                     });
 
                     processData();
-                    saveDataToCloud(); // Auto-save imediato
+                    saveDataToCloud(); 
                     showToast("Lista de farm limpa!", "success");
                 };
 
-                // NEW: Limpar Recrutamento
                 const clearRecruitment = () => {
-                    // REMOVIDO: if(!confirm("Tem certeza que deseja zerar todos os recrutamentos?")) return;
 
                     recruitersList.value.forEach(m => {
-                        // Update persistence source
+                        
                         if (!manualData.value[m.discordId]) manualData.value[m.discordId] = {};
                         manualData.value[m.discordId].recruit = 0;
                         manualData.value[m.discordId].sponsor = 0;
@@ -4295,17 +4164,14 @@
                     }
                 };
 
-                // --- RAFFLE SYSTEM ---
-                // --- RAFFLE SYSTEM ---
                 const showRaffleModal = ref(false);
                 const raffleQty = ref(1);
-                const raffleType = ref('all'); // all, 200, 100
+                const raffleType = ref('all'); 
                 const raffleWinners = ref([]);
 
                 const runRaffle = () => {
                     if (activeFarmers.value.length === 0) { showToast("Nenhum farm ativo para sortear.", 'error'); return; }
 
-                    // Filter candidates
                     let candidates = activeFarmers.value;
                     if (raffleType.value !== 'all') {
                         candidates = candidates.filter(f => f.farmStatus == raffleType.value);
@@ -4313,14 +4179,11 @@
 
                     if (candidates.length === 0) { showToast("Nenhum candidato encontrado com este filtro.", 'error'); return; }
 
-                    // Shuffle (Fisher-Yates)
                     const shuffled = [...candidates].sort(() => 0.5 - Math.random());
 
-                    // Pick Winners
                     raffleWinners.value = shuffled.slice(0, raffleQty.value);
                     showToast(`Sorteio realizado! ${raffleWinners.value.length} vencedores.`, 'success');
                 };
-
 
                 const getRankLeader = (rankGroup) => {
                     if (!rankGroup.members || rankGroup.members.length === 0) return null;
@@ -4363,7 +4226,7 @@
                 const topSellersChart = computed(() => [...salesRanking.value].slice(0, 5));
 
                 const topHoursMembers = computed(() => [...processedData.value].filter(m => {
-                    if (m.cleanName.toLowerCase().includes('(exonerado)')) return false; // Hide Exonerated
+                    if (m.cleanName.toLowerCase().includes('(exonerado)')) return false; 
                     if (m.statusHours !== 'TOP') return false;
                     const rank = config.value.ranks.find(r => r.tag.toUpperCase() === (m.roleTag || '').toUpperCase());
                     return rank && !rank.ignoreHours;
@@ -4384,9 +4247,8 @@
                 const minutesToTime = (mins) => { const h = Math.floor(mins / 60); const m = mins % 60; return `${h}h ${m > 0 ? m + 'm' : ''}`; };
                 const findMember = () => { };
 
-                // Helper to find name from processed data
                 const getBoosterName = (id) => {
-                    // Try to find in processed data (from Excel)
+                    
                     const found = processedData.value.find(m => m.discordId === id);
                     if (found && !found.cleanName.startsWith('Booster')) return found.cleanName;
                     return 'Sem nome (Fora do Excel)';
@@ -4458,7 +4320,6 @@
                         }
                         tag = rankCfg.tag || tag;
 
-                        // FORCE NUMBER CONVERSION TO FIX 'ADV' BUG
                         const metaMinutes = Number(rankCfg.metaHours || 0) * 60;
                         const metaTopMinutes = Number(config.value.globalTopHours || 0) * 60;
 
@@ -4469,7 +4330,7 @@
                             if (hMatch) totalMinutes += parseInt(hMatch[1]) * 60;
                             if (mMatch) totalMinutes += parseInt(mMatch[1]);
                         } else {
-                            // Fallback para formatos numéricos (Excel) ou "HH:MM"
+                            
                             const str = timeStr.toString().trim();
                             if (str.includes(':')) {
                                 const p = str.split(':');
@@ -4477,9 +4338,7 @@
                             } else {
                                 const val = parseFloat(str.replace(',', '.'));
                                 if (!isNaN(val)) {
-                                    // Se < 5 assumimos fração de dia (ex: 0.6 = 14.4h)
-                                    // Se >= 5 assumimos horas diretas (ex: 15.5 = 15h 30m)
-                                    // Igual à lógica do Bot
+
                                     if (val < 5) totalMinutes = Math.round(val * 24 * 60);
                                     else totalMinutes = Math.round(val * 60);
                                 }
@@ -4487,11 +4346,10 @@
                         }
 
                         let status = 'ADV';
-                        // Ensure comparisons are numeric
+                        
                         if (metaTopMinutes > 0 && totalMinutes >= metaTopMinutes) status = 'TOP';
                         else if (metaMinutes > 0 && totalMinutes >= metaMinutes) status = 'SHOW';
 
-                        // LOAD MANUAL DATA FROM PERSISTENT STORE
                         let manualRecruit = 0; let manualSponsor = 0; let manualFarm = 0;
                         let manualTreinamentoEsp = 0; let manualProvaEsp = 0; let manualProvaEng = 0;
                         if (manualData.value[discordId]) {
@@ -4502,7 +4360,6 @@
                             manualProvaEng = parseInt(prev.provaEng) || 0;
                         }
 
-                        // LOAD BOOSTER DATA
                         let boosterPoints = 0;
                         if (boostersData.value[discordId]) {
                             boosterPoints = boostersData.value[discordId].points || 0;
@@ -4510,10 +4367,8 @@
 
                         const recruitSalary = manualRecruit * config.value.recruitValue;
 
-                        // NOVA LÓGICA DE PONTOS TOP HORAS (PROGRESSIVA)
-                        // 15h = 100pts. +100pts a cada 5h adicionais.
                         let topHoursPoints = 0;
-                        const baseThreshold = 15 * 60; // 15 horas em minutos
+                        const baseThreshold = 15 * 60; 
                         if (totalMinutes >= baseThreshold) {
                             topHoursPoints = 100;
                             const surplus = totalMinutes - baseThreshold;
@@ -4524,16 +4379,6 @@
                         result.push({ id: idx, cleanName, role: rankCfg.name, roleTag: tag, emoji: rankCfg.emoji || '👤', ingameId, discordId, hours: totalMinutes, metaAplicadaHours: rankCfg.metaHours, statusHours: status, kits, imposto: kits * config.value.taxValue, lucro: kits * (config.value.kitPrice - config.value.taxValue), promoDate, recruitCount: manualRecruit, sponsorCount: manualSponsor, farmStatus: manualFarm, boosterPoints, recruitSalary, topHoursPoints, treinamentoEsp: manualTreinamentoEsp, provaEsp: manualProvaEsp, provaEng: manualProvaEng });
                     });
 
-                    // REMOVED MISSING BOOSTERS LOGIC: Only boosters present in the Excel (rawData) will be counted.
-                    /*
-                    Object.keys(boostersData.value).forEach(bid => {
-                        if (!result.find(r => r.discordId === bid)) {
-                           // Logic removed to ensure consistency with spreadsheet
-                        }
-                    });
-                    */
-
-                    // Garante Jadson (354741432113823746) e Josh (395393325772963851) como Donos no site
                     const JADSON_FALLBACK = { id: '354741432113823746', name: 'Jadson' };
                     const JOSH_FALLBACK = { id: '395393325772963851', name: 'Josh' };
                     let ownersFallback = (donosData.value.length > 0 ? [...donosData.value] : [
@@ -4550,7 +4395,6 @@
                         ownersFallback.push(JOSH_FALLBACK);
                     }
 
-                    // Forçar nome "Jadson" para o ID 354741432113823746 se o nome vindo do banco for genérico
                     ownersFallback = ownersFallback.map(o => {
                         const sId = String(o.id || '').trim();
                         if (sId === '354741432113823746') {
@@ -4558,7 +4402,7 @@
                         }
                         return { ...o, id: sId };
                     });
-                    // Log dos donos disponíveis para debug (visível no Console do browser)
+                    
                     console.log('[Donos] ownersFallback:', ownersFallback.map(o => o.id + ' | ' + o.name));
                     console.log('[Donos] DESC no result:', result.filter(r => r.roleTag === 'DESC').map(r => r.discordId + ' | ' + r.cleanName));
 
@@ -4566,11 +4410,11 @@
                         const ownerId = (owner.id || '').trim();
                         const existingIdx = result.findIndex(r => r.discordId === ownerId);
                         if (existingIdx === -1) {
-                            // Dono não está no rawData: injeta normalmente
+                            
                             console.log(`[Donos] Injetando dono não encontrado no rawData: ${owner.name} (${ownerId})`);
                             result.push({ id: `owner-manual-${ownerId}`, cleanName: owner.name, role: 'Dono', roleTag: 'DONO', emoji: '👑', ingameId: 'N/A', discordId: ownerId, hours: 0, metaAplicadaHours: 0, statusHours: 'SHOW', kits: 0, imposto: 0, lucro: 0, promoDate: 'N/A', recruitCount: 0, sponsorCount: 0, farmStatus: 0, boosterPoints: 0, recruitSalary: 0, topHoursPoints: 0, treinamentoEsp: 0, provaEsp: 0, provaEng: 0 });
                         } else {
-                            // Dono encontrado no rawData — Força cargo para DONO para aparecer como Dono no site
+                            
                             console.log(`[Donos] Definindo ${result[existingIdx].cleanName} como DONO`);
                             result[existingIdx].roleTag = 'DONO';
                             result[existingIdx].role = 'Dono';
@@ -4581,7 +4425,6 @@
                         }
                     });
 
-                    // INJEÇÃO FIXA E INCONDICIONAL DO DONO JADSON (Garante 100% no site mesmo se estiver no Excel com outro nome)
                     const JADSON_ID = '354741432113823746';
                     const jadsonIdx = result.findIndex(r => r.discordId === JADSON_ID || (r.cleanName && r.cleanName.toLowerCase().includes('jadson')));
                     if (jadsonIdx > -1) {
@@ -4595,7 +4438,7 @@
                         result.push({ id: `owner-manual-${JADSON_ID}`, cleanName: 'Jadson', role: 'Dono', roleTag: 'DONO', emoji: '👑', ingameId: 'N/A', discordId: JADSON_ID, hours: 0, metaAplicadaHours: 0, statusHours: 'SHOW', kits: 0, imposto: 0, lucro: 0, promoDate: 'N/A', recruitCount: 0, sponsorCount: 0, farmStatus: 0, boosterPoints: 0, recruitSalary: 0, topHoursPoints: 0, treinamentoEsp: 0, provaEsp: 0, provaEng: 0 });
                     }
                     processedData.value = result;
-                    // IMPORTANT: Update Charts AND Icons
+                    
                     nextTick(() => {
                         refreshUI();
                         if (view.value === 'overview') updateCharts();
@@ -4609,7 +4452,7 @@
 
                 const downloadFile = (type) => {
                     let content = ""; let filename = "";
-                    // GLOBAL FILTER: Exclude Exonerated from ALL Downloads
+                    
                     const activeMembers = processedData.value.filter(m => !m.cleanName.toLowerCase().includes('(exonerado)'));
 
                     const makeTxt = (list, name) => {
@@ -4619,7 +4462,7 @@
                     if (type === 'pagamento') {
                         content = activeMembers.filter(m => m.recruitSalary > 0).map(m => `<@${m.discordId}> ${m.recruitSalary}`).join('\n'); filename = "Pagamento_Recrutadores.txt";
                     } else if (type === 'pontos_geral') {
-                        // Geral: soma TODOS os módulos de pontos
+                        
                         makeTxt(activeMembers.map(m => ({
                             id: m.discordId,
                             pts: (m.recruitCount * 125)
@@ -4656,14 +4499,12 @@
                     const link = document.createElement("a"); link.href = URL.createObjectURL(new Blob([content], { type: "text/plain;charset=utf-8" })); link.download = filename; document.body.appendChild(link); link.click(); document.body.removeChild(link);
                 };
 
-                // LOGIC FOR CHARTS
                 let salesChart = null;
                 let topChart = null;
 
                 const updateCharts = () => {
                     if (view.value !== 'overview') return;
 
-                    // Ensure DOM elements exist with slight delay to be sure
                     setTimeout(() => {
                         const el1 = document.querySelector("#chart-sales");
                         const el2 = document.querySelector("#chart-top");
@@ -4708,24 +4549,22 @@
                         if (topChart) topChart.destroy();
                         topChart = new ApexCharts(el2, optionsTop);
                         topChart.render();
-                    }, 200); // Safe delay
+                    }, 200); 
                 };
 
                 watch(view, (newVal) => {
-                    refreshUI(); // Icons
+                    refreshUI(); 
                     if (newVal === 'overview') {
-                        updateCharts(); // Charts
+                        updateCharts(); 
                     }
                 });
 
-                // Watch data changes to update charts if in overview
                 watch(processedData, () => {
                     if (view.value === 'overview') updateCharts();
                 });
 
-                // IMPORTANT: Deep watcher for config changes to trigger data recalculation
                 watch(() => config.value, () => {
-                    processData(); // Recalculate statuses if config changes (e.g. in Admin)
+                    processData(); 
                     if (view.value === 'overview') updateCharts();
                 }, { deep: true });
 
